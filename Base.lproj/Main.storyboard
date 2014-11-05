@@ -124,12 +124,78 @@
                     <view key="view" contentMode="scaleToFill" id="iqM-nQ-cCM">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pss-DF-HOa">
+                                <rect key="frame" x="201" y="291" width="199" height="162"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="199" id="vhc-jp-dKg"/>
+                                </constraints>
+                            </pickerView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose the type of race you want to offer:" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2GH-QS-jp6">
+                                <rect key="frame" x="101" y="223" width="399" height="60"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fill in the data for your car:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gfu-ly-BMW">
+                                <rect key="frame" x="177" y="103" width="247" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="247" id="Mge-d7-yXA"/>
+                                    <constraint firstAttribute="height" constant="21" id="Pjn-L3-oVi"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" keyboardDismissMode="interactive" text="vbcvnb" translatesAutoresizingMaskIntoConstraints="NO" id="ZVo-HV-jvq">
+                                <rect key="frame" x="180" y="132" width="241" height="83"/>
+                                <color key="backgroundColor" red="0.95155619256621726" green="0.95513791454081631" blue="0.87834161832019952" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" red="0.0074091372279999996" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="241" id="red-XD-8zG"/>
+                                </constraints>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qmq-c0-rok">
+                                <rect key="frame" x="180" y="479" width="241" height="50"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="Add Challenge">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="2GH-QS-jp6" firstAttribute="centerX" secondItem="ZVo-HV-jvq" secondAttribute="centerX" id="5DV-17-EcG"/>
+                            <constraint firstItem="2GH-QS-jp6" firstAttribute="centerX" secondItem="iqM-nQ-cCM" secondAttribute="centerX" id="9to-4T-lrz"/>
+                            <constraint firstItem="2GH-QS-jp6" firstAttribute="top" secondItem="ZVo-HV-jvq" secondAttribute="bottom" constant="8" id="B9k-ow-FaL"/>
+                            <constraint firstItem="2GH-QS-jp6" firstAttribute="leading" secondItem="iqM-nQ-cCM" secondAttribute="leadingMargin" constant="85" id="HDP-0X-HZr"/>
+                            <constraint firstItem="TNk-5r-HSm" firstAttribute="top" secondItem="qmq-c0-rok" secondAttribute="bottom" constant="22" id="M26-vM-BKM"/>
+                            <constraint firstItem="pss-DF-HOa" firstAttribute="top" secondItem="ZVo-HV-jvq" secondAttribute="bottom" constant="76" id="Vdc-gT-hdY"/>
+                            <constraint firstItem="gfu-ly-BMW" firstAttribute="top" secondItem="yZ2-1I-3ZO" secondAttribute="bottom" constant="39" id="Vl4-NX-Kdu"/>
+                            <constraint firstItem="ZVo-HV-jvq" firstAttribute="top" secondItem="gfu-ly-BMW" secondAttribute="bottom" constant="8" symbolic="YES" id="ciL-EB-VqD"/>
+                            <constraint firstItem="qmq-c0-rok" firstAttribute="trailing" secondItem="ZVo-HV-jvq" secondAttribute="trailing" id="elP-23-Hdf"/>
+                            <constraint firstItem="gfu-ly-BMW" firstAttribute="centerX" secondItem="ZVo-HV-jvq" secondAttribute="centerX" id="etC-Ps-DR7"/>
+                            <constraint firstItem="qmq-c0-rok" firstAttribute="top" secondItem="pss-DF-HOa" secondAttribute="bottom" constant="26" id="nz2-Nk-0Wa"/>
+                            <constraint firstItem="qmq-c0-rok" firstAttribute="leading" secondItem="ZVo-HV-jvq" secondAttribute="leading" id="rnC-hZ-Bkk"/>
+                            <constraint firstItem="TNk-5r-HSm" firstAttribute="top" secondItem="pss-DF-HOa" secondAttribute="bottom" constant="98" id="wlr-mt-hNj"/>
+                            <constraint firstItem="pss-DF-HOa" firstAttribute="centerX" secondItem="2GH-QS-jp6" secondAttribute="centerX" id="zOh-6I-4pS"/>
+                            <constraint firstItem="TNk-5r-HSm" firstAttribute="top" secondItem="2GH-QS-jp6" secondAttribute="bottom" constant="268" id="zmE-NL-vfN"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="addChallengeBtn" destination="qmq-c0-rok" id="OBE-T4-VTI"/>
+                        <outlet property="carInput" destination="ZVo-HV-jvq" id="7Xm-8o-gRX"/>
+                        <outlet property="raceTypePicker" destination="pss-DF-HOa" id="X28-DW-dSf"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RzR-mf-ttP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1588" y="4"/>
+            <point key="canvasLocation" x="1606" y="5"/>
         </scene>
         <!--Dare Opponent View Controller-->
         <scene sceneID="T0v-a1-gqB">
@@ -332,6 +398,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="challengeBtn" destination="6XV-ul-XP2" id="qNa-V9-vgw"/>
                         <outlet property="currentUserCar" destination="tEO-bk-OaP" id="aSW-tX-KbA"/>
                         <outlet property="opponentCar" destination="8ED-X1-ukr" id="gL5-I5-CYW"/>
                         <outlet property="opponentMail" destination="lLX-du-DAP" id="qnd-QL-uQN"/>
@@ -342,9 +409,9 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e5R-dw-CGg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1588" y="667"/>
+            <point key="canvasLocation" x="1588" y="703"/>
         </scene>
-        <!--Who Challenged Me?-->
+        <!--Table View Controller-->
         <scene sceneID="Axv-t9-4G7">
             <objects>
                 <tableViewController id="Ybt-50-OAA" sceneMemberID="viewController">
@@ -365,13 +432,13 @@
                             <outlet property="delegate" destination="Ybt-50-OAA" id="NNd-pt-S0P"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Who Challenged Me?" id="A1t-ME-RNi"/>
+                    <navigationItem key="navigationItem" id="b7v-Lj-Lqw"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ict-OU-0QY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="151" y="1157"/>
+            <point key="canvasLocation" x="151" y="1207"/>
         </scene>
-        <!--My Challenges-->
+        <!--Table View Controller-->
         <scene sceneID="RXo-an-En7">
             <objects>
                 <tableViewController id="qJ6-5M-vPT" sceneMemberID="viewController">
@@ -392,11 +459,11 @@
                             <outlet property="delegate" destination="qJ6-5M-vPT" id="woN-Af-CnM"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="My Challenges" id="NHJ-6G-Okt"/>
+                    <navigationItem key="navigationItem" id="tms-1O-8G6"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4E2-Na-eqa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="841" y="1157"/>
+            <point key="canvasLocation" x="938" y="1207"/>
         </scene>
         <!--Login Register View Controller-->
         <scene sceneID="G5y-oN-EYJ">
@@ -560,7 +627,9 @@
                     </view>
                     <connections>
                         <outlet property="emailInput" destination="oiW-OR-rIA" id="DV1-51-axc"/>
+                        <outlet property="loginBtnOutlet" destination="nci-qj-gcI" id="F0x-6R-mEp"/>
                         <outlet property="passwordInput" destination="P5d-gZ-Uqo" id="ni0-j0-cCg"/>
+                        <outlet property="signUpBtnOutlet" destination="voX-c0-VpO" id="fxg-Xp-Ejk"/>
                         <outlet property="usernameInput" destination="hgM-M6-I5e" id="JoJ-4V-jYC"/>
                         <segue destination="RUb-4o-TZa" kind="show" identifier="loggedInSegue" id="HYJ-2x-X8M"/>
                     </connections>
@@ -581,8 +650,8 @@
                     </tabBar>
                     <connections>
                         <segue destination="0Hl-Qi-cuW" kind="relationship" relationship="viewControllers" id="7np-yv-A1e"/>
-                        <segue destination="Ybt-50-OAA" kind="relationship" relationship="viewControllers" id="rpX-AC-3mt"/>
-                        <segue destination="qJ6-5M-vPT" kind="relationship" relationship="viewControllers" id="X4N-IU-bpt"/>
+                        <segue destination="gGl-ZM-TGm" kind="relationship" relationship="viewControllers" id="rpX-AC-3mt"/>
+                        <segue destination="vGn-cv-I0C" kind="relationship" relationship="viewControllers" id="X4N-IU-bpt"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="J1F-GV-XV2" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -606,7 +675,45 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="u87-p0-bP9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="869" y="-490"/>
+            <point key="canvasLocation" x="869" y="-434"/>
+        </scene>
+        <!--Who Challenged Me?-->
+        <scene sceneID="gYq-3Q-g4S">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="gGl-ZM-TGm" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Who Challenged Me?" id="A1t-ME-RNi"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="DzT-VT-4yd">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Ybt-50-OAA" kind="relationship" relationship="rootViewController" id="pFB-gI-Xg8"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="18f-QY-4pV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="89" y="1169"/>
+        </scene>
+        <!--My Challenges-->
+        <scene sceneID="Y75-yp-8rW">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="vGn-cv-I0C" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="My Challenges" id="NHJ-6G-Okt"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="xk5-19-xl0">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="qJ6-5M-vPT" kind="relationship" relationship="rootViewController" id="eYn-F5-U6y"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="L9P-vP-axi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="869" y="1179"/>
         </scene>
     </scenes>
 </document>
