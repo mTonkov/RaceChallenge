@@ -71,6 +71,27 @@
                        [self showAlert:@"Challenge added" andMessage:@""];
                    }];
   }];
+
+  [self animateButton:sender];
+}
+
+- (void)animateButton:(id)button {
+  UIView *btn = button;
+  [btn setFrame:CGRectMake(CGRectGetMinX(btn.frame), CGRectGetMinY(btn.frame),
+                           CGRectGetWidth(btn.frame),
+                           CGRectGetHeight(btn.frame))];
+
+  [UIView animateWithDuration:1
+      delay:0.2
+      options:UIViewAnimationOptionCurveEaseIn
+      animations:^{
+          // set the new frame
+          [btn setFrame:CGRectMake(2 * CGRectGetWidth(btn.frame),
+                                   CGRectGetMinY(btn.frame),
+                                   CGRectGetWidth(btn.frame),
+                                   CGRectGetHeight(btn.frame))];
+      }
+      completion:^(BOOL finished) { NSLog(@"Button animated!"); }];
 }
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {

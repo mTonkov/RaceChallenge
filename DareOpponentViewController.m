@@ -7,6 +7,8 @@
 //
 
 #import "DareOpponentViewController.h"
+#import "CDChallenge.h"
+#import "CoreDataDBHelper.h"
 
 @interface DareOpponentViewController ()
 @property(weak, nonatomic) IBOutlet UILabel *opponentName;
@@ -35,7 +37,8 @@
 }
 
 - (void)didReceiveMemoryWarning {
-  [super didReceiveMemoryWarning];}
+  [super didReceiveMemoryWarning];
+}
 
 - (IBAction)challengeOpponent:(id)sender {
   if (self.currentUserCar.text.length < 5) {
@@ -47,12 +50,21 @@
   self.selectedChallenge.challengerName = currentUser.username;
   self.selectedChallenge.challengerEmail = currentUser.email;
   self.selectedChallenge.challengerCar = self.currentUserCar.text;
-
   [self.selectedChallenge saveInBackground];
   [self.retrievedChallenges removeObject:self.selectedChallenge];
 
-  // TODO add to CoreData
+  // add to CoreData
+  CoreDataDBHelper *dbHelper = [CoreDataDBHelper getInstance];
+  CDChallenge *newCdChallenge =
+      [NSEntityDescription insertNewObjectForEntityForName:@"CDChallenge"
+                                    inManagedObjectContext:dbHelper.context];
+  [newCdChallenge setValuesFromChallenge:self.selectedChallenge];
+  newCdChallenge.displayOrder = [NSNumber numberWithInt:0];
 
+  [dbHelper.context insertObject:newCdChallenge];
+  [dbHelper saveContext];
+    NSLog(@"%@", newCdChallenge);
+    
   [self showAlert:@"New challenge!"
        andMessage:[NSString stringWithFormat:@"You just challenged %@",
                                              self.selectedChallenge.ownerName]];
