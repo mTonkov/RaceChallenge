@@ -135,8 +135,9 @@
         // Display a message when the table is empty
         UILabel *messageLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
         
-        messageLabel.text = @"No data is currently available. Please pull down to refresh.";
+        messageLabel.text = @"No data is currently available.\n Please, pull down to refresh or check your Internet connection.";
         messageLabel.textColor = [UIColor blackColor];
+//        messageLabel.backgroundColor = [UIColor colorWithRed:1.0 green:0.6 blue:0.1 alpha:0.8];
         messageLabel.numberOfLines = 0;
         messageLabel.textAlignment = NSTextAlignmentCenter;
         messageLabel.font = [UIFont fontWithName:@"Palatino-Italic" size:20];
@@ -146,7 +147,7 @@
         self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     }
     
-    return 0;
+    return 1;
 }
 
 @end

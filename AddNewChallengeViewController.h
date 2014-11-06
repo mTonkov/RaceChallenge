@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AddNewChallengeViewController : UIViewController
+@interface AddNewChallengeViewController : UIViewController<UIPickerViewDataSource, UIPickerViewDelegate>
+
 @property (weak, nonatomic) IBOutlet UITextView *carInput;
 @property (weak, nonatomic) IBOutlet UIPickerView *raceTypePicker;
 @property (weak, nonatomic) IBOutlet UIButton *addChallengeBtn;

@@ -15,7 +15,7 @@
 @property(weak, nonatomic) IBOutlet UILabel *raceType;
 @property(weak, nonatomic) IBOutlet UILabel *opponentMail;
 @property(weak, nonatomic) IBOutlet UITextField *currentUserCar;
-@property (weak, nonatomic) IBOutlet UIButton *challengeBtn;
+@property(weak, nonatomic) IBOutlet UIButton *challengeBtn;
 
 @end
 
@@ -30,22 +30,18 @@
   self.raceLocation.text = self.selectedChallenge.location;
   self.raceType.text = self.selectedChallenge.type;
   self.opponentMail.text = self.selectedChallenge.ownerEmail;
-    self.challengeBtn.layer.cornerRadius = 10;
+  self.challengeBtn.layer.cornerRadius = 10;
   currentUser = [PFUser currentUser];
 }
 
 - (void)didReceiveMemoryWarning {
-  [super didReceiveMemoryWarning];
-  // Dispose of any resources that can be recreated.
-}
+  [super didReceiveMemoryWarning];}
 
 - (IBAction)challengeOpponent:(id)sender {
   if (self.currentUserCar.text.length < 5) {
-    [[[UIAlertView alloc] initWithTitle:@"Not enough data for car!"
-                                message:@"Please provide car data"
-                               delegate:nil
-                      cancelButtonTitle:@"OK"
-                      otherButtonTitles:nil, nil] show];
+    [self showAlert:@"Not enough data for car!"
+         andMessage:@"Please provide car data"];
+
     return;
   }
   self.selectedChallenge.challengerName = currentUser.username;
@@ -57,14 +53,9 @@
 
   // TODO add to CoreData
 
-  [[[UIAlertView alloc]
-          initWithTitle:@"New challenge!"
-                message:[NSString
-                            stringWithFormat:@"You just challenged %@",
-                                             self.selectedChallenge.ownerName]
-               delegate:nil
-      cancelButtonTitle:@"OK"
-      otherButtonTitles:nil, nil] show];
+  [self showAlert:@"New challenge!"
+       andMessage:[NSString stringWithFormat:@"You just challenged %@",
+                                             self.selectedChallenge.ownerName]];
   [self animateButton:sender];
 }
 
@@ -76,7 +67,7 @@
 
   [UIView animateWithDuration:1
       delay:0.2
-      options:UIViewAnimationOptionTransitionFlipFromLeft
+      options:UIViewAnimationOptionCurveEaseIn
       animations:^{
           // set the new frame
           [btn setFrame:CGRectMake(2 * CGRectGetWidth(btn.frame),
@@ -87,15 +78,16 @@
       completion:^(BOOL finished) { NSLog(@"Button animated!"); }];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little
-preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+  [self.view endEditing:YES];
 }
-*/
+
+- (void)showAlert:(NSString *)title andMessage:(NSString *)msg {
+  [[[UIAlertView alloc] initWithTitle:title
+                              message:msg
+                             delegate:nil
+                    cancelButtonTitle:@"OK"
+                    otherButtonTitles:nil, nil] show];
+}
 
 @end

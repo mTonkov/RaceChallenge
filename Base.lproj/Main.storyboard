@@ -126,29 +126,17 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pss-DF-HOa">
-                                <rect key="frame" x="201" y="291" width="199" height="162"/>
+                                <rect key="frame" x="201" y="309" width="199" height="162"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="199" id="vhc-jp-dKg"/>
                                 </constraints>
+                                <connections>
+                                    <outlet property="dataSource" destination="Gym-04-dZp" id="mkn-dW-2Tu"/>
+                                    <outlet property="delegate" destination="Gym-04-dZp" id="nOx-L3-HJu"/>
+                                </connections>
                             </pickerView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose the type of race you want to offer:" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2GH-QS-jp6">
-                                <rect key="frame" x="101" y="223" width="399" height="60"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fill in the data for your car:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gfu-ly-BMW">
-                                <rect key="frame" x="177" y="103" width="247" height="21"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="247" id="Mge-d7-yXA"/>
-                                    <constraint firstAttribute="height" constant="21" id="Pjn-L3-oVi"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" keyboardDismissMode="interactive" text="vbcvnb" translatesAutoresizingMaskIntoConstraints="NO" id="ZVo-HV-jvq">
-                                <rect key="frame" x="180" y="132" width="241" height="83"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" keyboardDismissMode="interactive" text="Car details" translatesAutoresizingMaskIntoConstraints="NO" id="ZVo-HV-jvq">
+                                <rect key="frame" x="180" y="186" width="241" height="83"/>
                                 <color key="backgroundColor" red="0.95155619256621726" green="0.95513791454081631" blue="0.87834161832019952" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="tintColor" red="0.0074091372279999996" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -166,29 +154,51 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="addNewChallenge:" destination="Gym-04-dZp" eventType="touchUpInside" id="t8k-qb-EFH"/>
+                                </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose the type of race you want to propose:" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2GH-QS-jp6">
+                                <rect key="frame" x="16" y="277" width="568" height="60"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gfu-ly-BMW">
+                                <rect key="frame" x="16" y="77" width="568" height="101"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="568" id="Mge-d7-yXA"/>
+                                    <constraint firstAttribute="height" constant="101" id="Pjn-L3-oVi"/>
+                                </constraints>
+                                <string key="text">Fill in some information about your car.
+Remember, it's all about skills, 
+so be honest...</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="2GH-QS-jp6" firstAttribute="centerX" secondItem="ZVo-HV-jvq" secondAttribute="centerX" id="5DV-17-EcG"/>
                             <constraint firstItem="2GH-QS-jp6" firstAttribute="centerX" secondItem="iqM-nQ-cCM" secondAttribute="centerX" id="9to-4T-lrz"/>
                             <constraint firstItem="2GH-QS-jp6" firstAttribute="top" secondItem="ZVo-HV-jvq" secondAttribute="bottom" constant="8" id="B9k-ow-FaL"/>
-                            <constraint firstItem="2GH-QS-jp6" firstAttribute="leading" secondItem="iqM-nQ-cCM" secondAttribute="leadingMargin" constant="85" id="HDP-0X-HZr"/>
+                            <constraint firstItem="2GH-QS-jp6" firstAttribute="leading" secondItem="iqM-nQ-cCM" secondAttribute="leadingMargin" id="HDP-0X-HZr"/>
                             <constraint firstItem="TNk-5r-HSm" firstAttribute="top" secondItem="qmq-c0-rok" secondAttribute="bottom" constant="22" id="M26-vM-BKM"/>
-                            <constraint firstItem="pss-DF-HOa" firstAttribute="top" secondItem="ZVo-HV-jvq" secondAttribute="bottom" constant="76" id="Vdc-gT-hdY"/>
-                            <constraint firstItem="gfu-ly-BMW" firstAttribute="top" secondItem="yZ2-1I-3ZO" secondAttribute="bottom" constant="39" id="Vl4-NX-Kdu"/>
+                            <constraint firstItem="pss-DF-HOa" firstAttribute="top" secondItem="ZVo-HV-jvq" secondAttribute="bottom" constant="40" id="Vdc-gT-hdY"/>
+                            <constraint firstItem="gfu-ly-BMW" firstAttribute="top" secondItem="yZ2-1I-3ZO" secondAttribute="bottom" constant="13" id="Vl4-NX-Kdu"/>
                             <constraint firstItem="ZVo-HV-jvq" firstAttribute="top" secondItem="gfu-ly-BMW" secondAttribute="bottom" constant="8" symbolic="YES" id="ciL-EB-VqD"/>
                             <constraint firstItem="qmq-c0-rok" firstAttribute="trailing" secondItem="ZVo-HV-jvq" secondAttribute="trailing" id="elP-23-Hdf"/>
                             <constraint firstItem="gfu-ly-BMW" firstAttribute="centerX" secondItem="ZVo-HV-jvq" secondAttribute="centerX" id="etC-Ps-DR7"/>
-                            <constraint firstItem="qmq-c0-rok" firstAttribute="top" secondItem="pss-DF-HOa" secondAttribute="bottom" constant="26" id="nz2-Nk-0Wa"/>
+                            <constraint firstItem="qmq-c0-rok" firstAttribute="top" secondItem="pss-DF-HOa" secondAttribute="bottom" constant="8" id="nz2-Nk-0Wa"/>
                             <constraint firstItem="qmq-c0-rok" firstAttribute="leading" secondItem="ZVo-HV-jvq" secondAttribute="leading" id="rnC-hZ-Bkk"/>
-                            <constraint firstItem="TNk-5r-HSm" firstAttribute="top" secondItem="pss-DF-HOa" secondAttribute="bottom" constant="98" id="wlr-mt-hNj"/>
+                            <constraint firstItem="TNk-5r-HSm" firstAttribute="top" secondItem="pss-DF-HOa" secondAttribute="bottom" constant="80" id="wlr-mt-hNj"/>
                             <constraint firstItem="pss-DF-HOa" firstAttribute="centerX" secondItem="2GH-QS-jp6" secondAttribute="centerX" id="zOh-6I-4pS"/>
-                            <constraint firstItem="TNk-5r-HSm" firstAttribute="top" secondItem="2GH-QS-jp6" secondAttribute="bottom" constant="268" id="zmE-NL-vfN"/>
+                            <constraint firstItem="TNk-5r-HSm" firstAttribute="top" secondItem="2GH-QS-jp6" secondAttribute="bottom" constant="214" id="zmE-NL-vfN"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="addChallengeBtn" destination="qmq-c0-rok" id="OBE-T4-VTI"/>
+                        <outlet property="addChallengeBtn" destination="qmq-c0-rok" id="j0N-bZ-Ouo"/>
                         <outlet property="carInput" destination="ZVo-HV-jvq" id="7Xm-8o-gRX"/>
                         <outlet property="raceTypePicker" destination="pss-DF-HOa" id="X28-DW-dSf"/>
                     </connections>
@@ -323,6 +333,12 @@
                                 </attributedString>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="location" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mhj-ly-84E">
+                                <rect key="frame" x="127" y="185" width="457" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2fB-JM-jcm">
                                 <rect key="frame" x="18" y="424" width="356" height="21"/>
                                 <constraints>
@@ -337,7 +353,7 @@
                                             <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
                                         </attributes>
                                     </fragment>
-                                    <fragment content="providing information about your car is mandatory.">
+                                    <fragment content=" information about your car is mandatory.">
                                         <attributes>
                                             <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <font key="NSFont" size="15" name="Skia-Regular_Extended"/>
@@ -345,12 +361,6 @@
                                         </attributes>
                                     </fragment>
                                 </attributedString>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="location" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mhj-ly-84E">
-                                <rect key="frame" x="127" y="185" width="457" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
