@@ -18,13 +18,17 @@
 @implementation MyChallengesTVC {
   NSMutableArray *_myChallenges;
   CoreDataDBHelper *_cdHelper;
-    PFUser* _currentUser;
+  PFUser *_currentUser;
 }
 
 - (void)viewDidLoad {
   [super viewDidLoad];
   _cdHelper = [CoreDataDBHelper getInstance];
-    _currentUser = [PFUser currentUser];
+  _currentUser = [PFUser currentUser];
+
+    if (!_myChallenges) {
+        [self getCdData];
+    }
     
   UILongPressGestureRecognizer *longPress =
       [[UILongPressGestureRecognizer alloc]
@@ -34,17 +38,17 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    
-    [self getCdData];
+
+  [self getCdData];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
-    // remember the order
-    for (int i=0; i<_myChallenges.count; i++) {
-        CDChallenge *chal = _myChallenges[i];
-         chal.displayOrder = [NSNumber numberWithInt:i+1];
-    }
-    [_cdHelper saveContext];
+  // remember the order
+  for (int i = 0; i < _myChallenges.count; i++) {
+    CDChallenge *chal = _myChallenges[i];
+    chal.displayOrder = [NSNumber numberWithInt:i + 1];
+  }
+  [_cdHelper saveContext];
 }
 
 - (IBAction)longPressGestureRecognized:(id)sender {
@@ -105,7 +109,6 @@
 
       [_myChallenges exchangeObjectAtIndex:indexPath.row
                          withObjectAtIndex:sourceIndexPath.row];
-   
 
       [self.tableView moveRowAtIndexPath:sourceIndexPath toIndexPath:indexPath];
       sourceIndexPath = indexPath;
@@ -140,16 +143,17 @@
 }
 
 - (void)getCdData {
-  NSFetchRequest *request = 
+  NSFetchRequest *request =
       [NSFetchRequest fetchRequestWithEntityName:@"CDChallenge"];
   NSSortDescriptor *sort =
       [NSSortDescriptor sortDescriptorWithKey:@"displayOrder" ascending:YES];
   [request setSortDescriptors:[NSArray arrayWithObject:sort]];
 
-    NSString *currentUserId = _currentUser.objectId;
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"challengeOwnerId == %@", currentUserId];
-    [request setPredicate:predicate];
-    
+  NSString *currentUserId = _currentUser.objectId;
+  NSPredicate *predicate = [NSPredicate
+      predicateWithFormat:@"challengeOwnerId == %@", currentUserId];
+  [request setPredicate:predicate];
+
   _myChallenges = [NSMutableArray
       arrayWithArray:[_cdHelper.context executeFetchRequest:request error:nil]];
 }
@@ -181,7 +185,7 @@
   }
 
   CDChallenge *chal = [_myChallenges objectAtIndex:indexPath.row];
-    
+
   UILabel *raceType = (UILabel *)[cell viewWithTag:1];
   UILabel *opponent = (UILabel *)[cell viewWithTag:2];
   UILabel *opponentEmail = (UILabel *)[cell viewWithTag:3];

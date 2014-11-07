@@ -779,10 +779,10 @@ so be honest...</string>
             </objects>
             <point key="canvasLocation" x="-600" y="378"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Tab Bar View Controller-->
         <scene sceneID="pH8-Bi-QXu">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="RUb-4o-TZa" sceneMemberID="viewController">
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="RUb-4o-TZa" customClass="TabBarViewController" sceneMemberID="viewController">
                     <toolbarItems/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="nMI-PG-tmC">
