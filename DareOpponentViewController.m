@@ -60,11 +60,12 @@
                                     inManagedObjectContext:dbHelper.context];
   [newCdChallenge setValuesFromChallenge:self.selectedChallenge];
   newCdChallenge.displayOrder = [NSNumber numberWithInt:0];
+  newCdChallenge.challengeOwnerId = currentUser.objectId;
 
   [dbHelper.context insertObject:newCdChallenge];
   [dbHelper saveContext];
-    NSLog(@"%@", newCdChallenge);
-    
+  NSLog(@"%@", newCdChallenge);
+
   [self showAlert:@"New challenge!"
        andMessage:[NSString stringWithFormat:@"You just challenged %@",
                                              self.selectedChallenge.ownerName]];

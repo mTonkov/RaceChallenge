@@ -25,22 +25,30 @@
   currentUser = [PFUser currentUser];
 
   [self getChallengesFromBackend];
-//  [[self tableView] reloadData];
-    
-    self.refreshControl = [[UIRefreshControl alloc] init];
-    self.refreshControl.backgroundColor = [UIColor purpleColor];
-    self.refreshControl.tintColor = [UIColor whiteColor];
-    [self.refreshControl addTarget:self
-                            action:@selector(getChallengesFromBackend)
-                  forControlEvents:UIControlEventValueChanged];
-    
+  //  [[self tableView] reloadData];
+
+  self.refreshControl = [[UIRefreshControl alloc] init];
+  self.refreshControl.backgroundColor = [UIColor purpleColor];
+  self.refreshControl.tintColor = [UIColor whiteColor];
+  [self.refreshControl addTarget:self
+                          action:@selector(getChallengesFromBackend)
+                forControlEvents:UIControlEventValueChanged];
+
   self.title = @"All Challenges";
 }
 
--(void)viewWillAppear:(BOOL)animated{
-    
-      [[self tableView] reloadData];
+- (void)viewWillAppear:(BOOL)animated {
+
+  [[self tableView] reloadData];
+
+  [self becomeFirstResponder];
+  [super viewWillAppear:animated];
 }
+- (void)viewWillDisappear:(BOOL)animated {
+  [self resignFirstResponder];
+  [super viewWillDisappear:animated];
+}
+
 - (void)didReceiveMemoryWarning {
   [super didReceiveMemoryWarning];
   // Dispose of any resources that can be recreated.
@@ -58,21 +66,27 @@
         availableChallenges = [[NSMutableArray alloc] initWithArray:objects];
         [[weakSelf tableView] reloadData];
       }
-      
+
       if (self.refreshControl) {
-          NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-          [formatter setDateFormat:@"MMM d, h:mm a"];
-          NSString *title = [NSString stringWithFormat:@"Last update: %@", [formatter stringFromDate:[NSDate date]]];
-          NSDictionary *attrsDictionary = [NSDictionary dictionaryWithObject:[UIColor whiteColor]
-                                                                      forKey:NSForegroundColorAttributeName];
-          NSAttributedString *attributedTitle = [[NSAttributedString alloc] initWithString:title attributes:attrsDictionary];
-          self.refreshControl.attributedTitle = attributedTitle;
-          [self.refreshControl endRefreshing];
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateFormat:@"MMM d, h:mm a"];
+        NSString *title = [NSString
+            stringWithFormat:@"Last update: %@",
+                             [formatter stringFromDate:[NSDate date]]];
+        NSDictionary *attrsDictionary =
+            [NSDictionary dictionaryWithObject:[UIColor whiteColor]
+                                        forKey:NSForegroundColorAttributeName];
+        NSAttributedString *attributedTitle =
+            [[NSAttributedString alloc] initWithString:title
+                                            attributes:attrsDictionary];
+        self.refreshControl.attributedTitle = attributedTitle;
+        [self.refreshControl endRefreshing];
       }
   }];
 }
 
-- (NSInteger)tableView:(UITableView *)tableView    numberOfRowsInSection:(NSInteger)section {
+- (NSInteger)tableView:(UITableView *)tableView
+    numberOfRowsInSection:(NSInteger)section {
   return availableChallenges.count;
 }
 
@@ -88,13 +102,14 @@
   }
 
   Challenge *chal = [availableChallenges objectAtIndex:indexPath.row];
-//  cell.textLabel.text = chal.ownerName;
-    UILabel *raceType = (UILabel *)[cell viewWithTag:1];
-    [raceType setText:[NSString stringWithFormat:@"%@ Race", [chal.type capitalizedString]]];
-    UILabel *raceAuthor = (UILabel *)[cell viewWithTag:2];
-    [raceAuthor setText:chal.ownerName];
-    UILabel *raceLocation = (UILabel *)[cell viewWithTag:3];
-    [raceLocation setText:chal.location];
+  //  cell.textLabel.text = chal.ownerName;
+  UILabel *raceType = (UILabel *)[cell viewWithTag:1];
+  [raceType setText:[NSString stringWithFormat:@"%@ Race",
+                                               [chal.type capitalizedString]]];
+  UILabel *raceAuthor = (UILabel *)[cell viewWithTag:2];
+  [raceAuthor setText:chal.ownerName];
+  UILabel *raceLocation = (UILabel *)[cell viewWithTag:3];
+  [raceLocation setText:chal.location];
 
   return cell;
 }
@@ -105,42 +120,69 @@
     DareOpponentViewController *destination = [segue destinationViewController];
     NSIndexPath *ip = [self.tableView indexPathForSelectedRow];
 
-    [destination setSelectedChallenge:[availableChallenges objectAtIndex:ip.row]];
-      [destination setRetrievedChallenges:availableChallenges];
+    [destination
+        setSelectedChallenge:[availableChallenges objectAtIndex:ip.row]];
+    [destination setRetrievedChallenges:availableChallenges];
   }
 }
 
-
 #pragma mark Customizing table view
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    if (availableChallenges) {
-        self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-        return 1;
-        
-    } else {
-        // Display a message when the table is empty
-        UILabel *messageLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
-        
-        messageLabel.text = @"No data is currently available.\n Please, pull down to refresh or check your Internet connection.";
-        messageLabel.textColor = [UIColor blackColor];
-//        messageLabel.backgroundColor = [UIColor colorWithRed:1.0 green:0.6 blue:0.1 alpha:0.8];
-        messageLabel.numberOfLines = 0;
-        messageLabel.textAlignment = NSTextAlignmentCenter;
-        messageLabel.font = [UIFont fontWithName:@"Palatino-Italic" size:20];
-        [messageLabel sizeToFit];
-        
-        self.tableView.backgroundView = messageLabel;
-        self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    }
-    
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+  if (availableChallenges) {
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     return 1;
+
+  } else {
+    // Display a message when the table is empty
+    UILabel *messageLabel = [[UILabel alloc]
+        initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width,
+                                 self.view.bounds.size.height)];
+
+    messageLabel.text = @"No data is currently available.\n Please, pull down "
+        @"to refresh or check your Internet connection.";
+    messageLabel.textColor = [UIColor blackColor];
+    //        messageLabel.backgroundColor = [UIColor colorWithRed:1.0 green:0.6
+    //        blue:0.1 alpha:0.8];
+    messageLabel.numberOfLines = 0;
+    messageLabel.textAlignment = NSTextAlignmentCenter;
+    messageLabel.font = [UIFont fontWithName:@"Palatino-Italic" size:20];
+    [messageLabel sizeToFit];
+
+    self.tableView.backgroundView = messageLabel;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+  }
+
+  return 1;
 }
 
+- (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event {
+  if (event.subtype == UIEventSubtypeMotionShake) {
+    [[[UIAlertView alloc]
+            initWithTitle:@"Exit?"
+                  message:@"Are you sure you want to exit this awesome app?"
+                 delegate:self
+        cancelButtonTitle:@"Cancel"
+        otherButtonTitles:@"Unfortunately, yes...", nil] show];
+  }
 
+  if ([super respondsToSelector:@selector(motionEnded:withEvent:)])
+    [super motionEnded:motion withEvent:event];
+}
+
+- (BOOL)canBecomeFirstResponder {
+  return YES;
+}
+
+- (void)alertView:(UIAlertView *)alertView
+    clickedButtonAtIndex:(NSInteger)buttonIndex {
+  if (buttonIndex == 1) {
+    exit(0);
+  }
+}
 /*
  // Override to support conditional editing of the table view.
- - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+ - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath
+ *)indexPath {
  // Return NO if you do not want the specified item to be editable.
  return YES;
  }
@@ -148,17 +190,18 @@
 
 /*
  // Override to support editing the table view.
- - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+ - (void)tableView:(UITableView *)tableView
+ commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
+ forRowAtIndexPath:(NSIndexPath *)indexPath {
  if (editingStyle == UITableViewCellEditingStyleDelete) {
  // Delete the row from the data source
- [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+ [tableView deleteRowsAtIndexPaths:@[indexPath]
+ withRowAnimation:UITableViewRowAnimationFade];
  } else if (editingStyle == UITableViewCellEditingStyleInsert) {
- // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+ // Create a new instance of the appropriate class, insert it into the array,
+ and add a new row to the table view
  }
  }
  */
 
 @end
-
-
-

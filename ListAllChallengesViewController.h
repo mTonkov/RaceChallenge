@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "Parse/Parse.h"
 
-@interface ListAllChallengesViewController : UITableViewController
+@interface ListAllChallengesViewController : UITableViewController<UIAlertViewDelegate>
 
 @end

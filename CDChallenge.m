@@ -8,7 +8,6 @@
 
 #import "CDChallenge.h"
 
-
 @implementation CDChallenge
 
 @dynamic opponentName;
@@ -17,12 +16,14 @@
 @dynamic raceType;
 @dynamic displayOrder;
 @dynamic opponentCar;
+@dynamic challengeOwnerId;
 
--(void) setValuesFromChallenge:(Challenge *)challenge{
-    self.opponentName = challenge.ownerName;
-    self.opponentEmail = challenge.ownerEmail;
-    self.opponentCar = challenge.ownerCar;
-    self.location = challenge.location;
-    self.raceType = challenge.type;
+- (void)setValuesFromChallenge:(Challenge *)challenge {
+  self.opponentName = challenge.ownerName;
+  self.opponentEmail = challenge.ownerEmail;
+  self.opponentCar = challenge.ownerCar;
+  self.location = challenge.location;
+  self.raceType = challenge.type;
 }
+
 @end
