@@ -26,10 +26,10 @@
   _cdHelper = [CoreDataDBHelper getInstance];
   _currentUser = [PFUser currentUser];
 
-    if (!_myChallenges) {
-        [self getCdData];
-    }
-    
+  if (!_myChallenges) {
+    [self getCdData];
+  }
+
   UILongPressGestureRecognizer *longPress =
       [[UILongPressGestureRecognizer alloc]
           initWithTarget:self
@@ -212,20 +212,5 @@
 
   return snapshot;
 }
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath
-*)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath
-*)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 @end

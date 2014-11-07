@@ -52,17 +52,13 @@
     message = @"Not swiped";
     break;
   }
-//  NSLog(@"%@", message);
-//NSLog(@"%d", _controllerIndex);
     
-//    NSLog(@"%ld", self.viewControllers.count);
     if (_controllerIndex >= (int)self.viewControllers.count) {
         _controllerIndex = (int)self.viewControllers.count-1;
     }else if (_controllerIndex<0){
         _controllerIndex = 0;
     }
     
-//    NSLog(@"%d", _controllerIndex);
     if (_controllerIndex!=self.selectedIndex) {
        
     UIView * fromView = self.selectedViewController.view;

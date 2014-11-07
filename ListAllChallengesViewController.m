@@ -10,6 +10,7 @@
 #import "Challenge.h"
 #import <Parse/Parse.h>
 #import "DareOpponentViewController.h"
+#import "Reachability.h"
 
 @interface ListAllChallengesViewController ()
 
@@ -41,6 +42,7 @@
 
   [[self tableView] reloadData];
 
+  // for shake gesture
   [self becomeFirstResponder];
   [super viewWillAppear:animated];
 }
@@ -55,34 +57,47 @@
 }
 
 - (void)getChallengesFromBackend {
-  PFQuery *query = [Challenge query];
-  [query whereKey:@"ownerId" notEqualTo:currentUser.objectId];
-  [query whereKeyDoesNotExist:@"challengerName"];
+  Reachability *networkReachability =
+      [Reachability reachabilityForInternetConnection];
+  NetworkStatus networkStatus = [networkReachability currentReachabilityStatus];
 
-  __weak id weakSelf = self;
-  [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+  if (networkStatus == NotReachable) {
 
-      if (!error) {
-        availableChallenges = [[NSMutableArray alloc] initWithArray:objects];
-        [[weakSelf tableView] reloadData];
-      }
+    [self showAlert:@"Data cannot be reached!"
+         andMessage:@"Please, check your Internet  connection!"];
 
-      if (self.refreshControl) {
-        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-        [formatter setDateFormat:@"MMM d, h:mm a"];
-        NSString *title = [NSString
-            stringWithFormat:@"Last update: %@",
-                             [formatter stringFromDate:[NSDate date]]];
-        NSDictionary *attrsDictionary =
-            [NSDictionary dictionaryWithObject:[UIColor whiteColor]
-                                        forKey:NSForegroundColorAttributeName];
-        NSAttributedString *attributedTitle =
-            [[NSAttributedString alloc] initWithString:title
-                                            attributes:attrsDictionary];
-        self.refreshControl.attributedTitle = attributedTitle;
-        [self.refreshControl endRefreshing];
-      }
-  }];
+    NSLog(@"There IS NO internet connection");
+  } else {
+
+    PFQuery *query = [Challenge query];
+    [query whereKey:@"ownerId" notEqualTo:currentUser.objectId];
+    [query whereKeyDoesNotExist:@"challengerName"];
+    __weak id weakSelf = self;
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects,
+                                              NSError *error) {
+        if (!error) {
+          availableChallenges = [[NSMutableArray alloc] initWithArray:objects];
+          [[weakSelf tableView] reloadData];
+        }
+        [self setMessageForQueriedData];
+
+        if (self.refreshControl) {
+          NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+          [formatter setDateFormat:@"MMM d, h:mm a"];
+          NSString *title = [NSString
+              stringWithFormat:@"Last update: %@",
+                               [formatter stringFromDate:[NSDate date]]];
+          NSDictionary *attrsDictionary = [NSDictionary
+              dictionaryWithObject:[UIColor whiteColor]
+                            forKey:NSForegroundColorAttributeName];
+          NSAttributedString *attributedTitle =
+              [[NSAttributedString alloc] initWithString:title
+                                              attributes:attrsDictionary];
+          self.refreshControl.attributedTitle = attributedTitle;
+          [self.refreshControl endRefreshing];
+        }
+    }];
+  }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView
@@ -127,13 +142,11 @@
 }
 
 #pragma mark Customizing table view
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+- (void)setMessageForQueriedData {
   if (availableChallenges) {
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-    return 1;
-
+    self.tableView.backgroundView = nil;
   } else {
-    // Display a message when the table is empty
     UILabel *messageLabel = [[UILabel alloc]
         initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width,
                                  self.view.bounds.size.height)];
@@ -151,8 +164,6 @@
     self.tableView.backgroundView = messageLabel;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
   }
-
-  return 1;
 }
 
 - (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event {
@@ -178,6 +189,14 @@
   if (buttonIndex == 1) {
     exit(0);
   }
+}
+
+- (void)showAlert:(NSString *)title andMessage:(NSString *)msg {
+  [[[UIAlertView alloc] initWithTitle:title
+                              message:msg
+                             delegate:nil
+                    cancelButtonTitle:@"OK"
+                    otherButtonTitles:nil, nil] show];
 }
 /*
  // Override to support conditional editing of the table view.
