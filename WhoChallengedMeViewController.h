@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+@class MBProgressHUD;
 @interface WhoChallengedMeViewController
     : UITableViewController <UIAlertViewDelegate>
 

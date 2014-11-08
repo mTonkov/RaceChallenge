@@ -11,7 +11,9 @@
 #import <Parse/Parse.h>
 #import "Reachability.h"
 
-@interface WhoChallengedMeViewController ()
+#import "MBProgressHUD.h"
+
+@interface WhoChallengedMeViewController () <UIGestureRecognizerDelegate>
 
 @end
 
@@ -20,38 +22,27 @@
   PFUser *_currentUser;
   Reachability *networkReachability;
   NetworkStatus networkStatus;
+    MBProgressHUD *_activityIndicator;
 }
 
 - (void)viewDidLoad {
   [super viewDidLoad];
   _currentUser = [PFUser currentUser];
   networkReachability = [Reachability reachabilityForInternetConnection];
+  
+    _activityIndicator = [[MBProgressHUD alloc] initWithView:self.view];
+    [self.view addSubview:_activityIndicator];
+    [_activityIndicator show:YES];
+
   [self initializeRefreshNotification];
   [self getChallengesFromBackend];
   self.title = @"Who Challenged Me?";
 
-  //    _downSwipeRecognizer =
-  //    [[UITapGestureRecognizer alloc] initWithTarget:self
-  //    action:@selector(swipe:)];
-  //    _downSwipeRecognizer.numberOfTapsRequired = 2;
-  //    [[UISwipeGestureRecognizer alloc] initWithTarget:self
-  //                                              action:@selector(swipe:)];
-  //    _downSwipeRecognizer.direction = UISwipeGestureRecognizerDirectionDown;
-
-  //    [self.tableView addGestureRecognizer:_downSwipeRecognizer];
 }
 
-//- (IBAction)swipe:(UISwipeGestureRecognizer *)recognizer {
-//
-//  if (self.refreshControl) {
-//    return;
-//  }
-//  [self initializeRefreshNotification];
-//    [self.view removeGestureRecognizer:_downSwipeRecognizer];
-//    _downSwipeRecognizer = nil;
-//}
 - (void)viewDidAppear:(BOOL)animated {
 }
+
 - (void)didReceiveMemoryWarning {
   [super didReceiveMemoryWarning];
 }
@@ -71,11 +62,16 @@
         [self messageIfNoDataRetrieved];
 
         if (self.refreshControl) {
+            self.refreshControl.backgroundColor = [UIColor purpleColor];
+            self.refreshControl.tintColor = [UIColor whiteColor];
+
           [self setRefreshingMessage];
           [self.refreshControl endRefreshing];
         }
     }];
   }
+    
+    [_activityIndicator hide:YES];
 }
 
 - (BOOL)checkInternetConnection {
@@ -94,6 +90,21 @@
   return YES;
 }
 
+
+- (void)initializeRefreshNotification {
+    if (!self.refreshControl) {
+        UIRefreshControl *refresh = [[UIRefreshControl alloc] init];
+        
+        [refresh addTarget:self
+                    action:@selector(getChallengesFromBackend)
+          forControlEvents:UIControlEventValueChanged];
+//        refresh.backgroundColor = [UIColor purpleColor];
+//        refresh.tintColor = [UIColor whiteColor];
+        self.refreshControl = refresh;
+        [self setRefreshingMessage];
+    }
+}
+
 - (void)setRefreshingMessage {
   NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
   [formatter setDateFormat:@"MMM d, h:mm a"];
@@ -107,20 +118,6 @@
       [[NSAttributedString alloc] initWithString:title
                                       attributes:attrsDictionary];
   self.refreshControl.attributedTitle = attributedTitle;
-}
-
-- (void)initializeRefreshNotification {
-  if (!self.refreshControl) {
-    UIRefreshControl *refresh = [[UIRefreshControl alloc] init];
-
-    [refresh addTarget:self
-                  action:@selector(getChallengesFromBackend)
-        forControlEvents:UIControlEventValueChanged];
-    refresh.backgroundColor = [UIColor purpleColor];
-    refresh.tintColor = [UIColor whiteColor];
-    self.refreshControl = refresh;
-    [self setRefreshingMessage];
-  }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView
@@ -167,8 +164,6 @@
     messageLabel.text =
         @"No data is currently available.\n Please, pull down to refresh";
     messageLabel.textColor = [UIColor blackColor];
-    //        messageLabel.backgroundColor = [UIColor colorWithRed:1.0
-    //        green:0.6        blue:0.1 alpha:0.8];
     messageLabel.numberOfLines = 0;
     messageLabel.textAlignment = NSTextAlignmentCenter;
     messageLabel.font = [UIFont fontWithName:@"Palatino-Italic" size:20];

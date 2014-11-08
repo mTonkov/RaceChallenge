@@ -11,7 +11,7 @@
 #import <Parse/Parse.h>
 #import "DareOpponentViewController.h"
 #import "Reachability.h"
-
+#import "MBProgressHUD.h"
 @interface ListAllChallengesViewController ()
 
 @end
@@ -21,12 +21,17 @@
   PFUser *_currentUser;
   Reachability *networkReachability;
   NetworkStatus networkStatus;
+  MBProgressHUD *HUD;
 }
 
 - (void)viewDidLoad {
   [super viewDidLoad];
   _currentUser = [PFUser currentUser];
   networkReachability = [Reachability reachabilityForInternetConnection];
+
+  HUD = [[MBProgressHUD alloc] initWithView:self.view];
+  [self.view addSubview:HUD];
+  [HUD show:YES];
 
   [self getChallengesFromBackend];
 
@@ -41,10 +46,8 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-
   [[self tableView] reloadData];
 }
-
 
 - (void)didReceiveMemoryWarning {
   [super didReceiveMemoryWarning];
@@ -107,6 +110,8 @@
 
 - (NSInteger)tableView:(UITableView *)tableView
     numberOfRowsInSection:(NSInteger)section {
+
+  [HUD hide:YES];
   return _availableChallenges.count;
 }
 
@@ -122,7 +127,7 @@
   }
 
   Challenge *chal = [_availableChallenges objectAtIndex:indexPath.row];
-    UILabel *raceType = (UILabel *)[cell viewWithTag:1];
+  UILabel *raceType = (UILabel *)[cell viewWithTag:1];
   [raceType setText:[NSString stringWithFormat:@"%@ Race",
                                                [chal.type capitalizedString]]];
   UILabel *raceAuthor = (UILabel *)[cell viewWithTag:2];

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Parse/Parse.h"
-
+@class MBProgressHUD;
 @interface ListAllChallengesViewController : UITableViewController<UIAlertViewDelegate>
 
 @end
