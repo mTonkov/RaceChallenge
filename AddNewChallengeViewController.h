@@ -13,5 +13,6 @@
 @property (weak, nonatomic) IBOutlet UITextView *carInput;
 @property (weak, nonatomic) IBOutlet UIPickerView *raceTypePicker;
 @property (weak, nonatomic) IBOutlet UIButton *addChallengeBtn;
+@property (weak, nonatomic) IBOutlet UITextField *locationInput;
 
 @end

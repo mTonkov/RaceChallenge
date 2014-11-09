@@ -49,6 +49,8 @@
 - (void)locationManager:(CLLocationManager *)manager
      didUpdateLocations:(NSArray *)locations {
   CLLocation *location = [locations lastObject];
+  NSLog(@"Location update");
+  NSLog(@"%@", location);
   if (_block) {
     _block(location);
     _block = nil;
