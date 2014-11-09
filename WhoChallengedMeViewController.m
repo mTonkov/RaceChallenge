@@ -22,22 +22,21 @@
   PFUser *_currentUser;
   Reachability *networkReachability;
   NetworkStatus networkStatus;
-    MBProgressHUD *_activityIndicator;
+  MBProgressHUD *_activityIndicator;
 }
 
 - (void)viewDidLoad {
   [super viewDidLoad];
   _currentUser = [PFUser currentUser];
   networkReachability = [Reachability reachabilityForInternetConnection];
-  
-    _activityIndicator = [[MBProgressHUD alloc] initWithView:self.view];
-    [self.view addSubview:_activityIndicator];
-    [_activityIndicator show:YES];
+
+  _activityIndicator = [[MBProgressHUD alloc] initWithView:self.view];
+  [self.view addSubview:_activityIndicator];
+  [_activityIndicator show:YES];
 
   [self initializeRefreshNotification];
   [self getChallengesFromBackend];
   self.title = @"Who Challenged Me?";
-
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -62,16 +61,13 @@
         [self messageIfNoDataRetrieved];
 
         if (self.refreshControl) {
-            self.refreshControl.backgroundColor = [UIColor purpleColor];
-            self.refreshControl.tintColor = [UIColor whiteColor];
-
           [self setRefreshingMessage];
           [self.refreshControl endRefreshing];
         }
     }];
   }
-    
-    [_activityIndicator hide:YES];
+
+  [_activityIndicator hide:YES];
 }
 
 - (BOOL)checkInternetConnection {
@@ -90,27 +86,36 @@
   return YES;
 }
 
-
 - (void)initializeRefreshNotification {
-    if (!self.refreshControl) {
-        UIRefreshControl *refresh = [[UIRefreshControl alloc] init];
-        
-        [refresh addTarget:self
-                    action:@selector(getChallengesFromBackend)
-          forControlEvents:UIControlEventValueChanged];
-//        refresh.backgroundColor = [UIColor purpleColor];
-//        refresh.tintColor = [UIColor whiteColor];
-        self.refreshControl = refresh;
-        [self setRefreshingMessage];
-    }
+  if (!self.refreshControl) {
+    UIRefreshControl *refresh = [[UIRefreshControl alloc] init];
+
+    [refresh addTarget:self
+                  action:@selector(getChallengesFromBackend)
+        forControlEvents:UIControlEventValueChanged];
+    refresh.backgroundColor = [UIColor purpleColor];
+    refresh.tintColor = [UIColor whiteColor];
+    self.refreshControl = refresh;
+    [self setRefreshingMessage];
+  }
 }
 
 - (void)setRefreshingMessage {
-  NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-  [formatter setDateFormat:@"MMM d, h:mm a"];
-  NSString *title =
-      [NSString stringWithFormat:@"Last update: %@",
-                                 [formatter stringFromDate:[NSDate date]]];
+  NSDateFormatter *formatter;
+  NSString *title;
+
+  if (self.refreshControl.isRefreshing) {
+    formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"MMM d, h:mm a"];
+    title =
+        [NSString stringWithFormat:@"Last update: %@",
+                                   [formatter stringFromDate:[NSDate date]]];
+    NSLog(@" set");
+  } else {
+    title = @"Pull down to Refresh...";
+    NSLog(@"initial set");
+  }
+
   NSDictionary *attrsDictionary =
       [NSDictionary dictionaryWithObject:[UIColor whiteColor]
                                   forKey:NSForegroundColorAttributeName];

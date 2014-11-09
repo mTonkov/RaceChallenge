@@ -60,6 +60,7 @@
     PFQuery *query = [Challenge query];
     [query whereKey:@"ownerId" notEqualTo:_currentUser.objectId];
     [query whereKeyDoesNotExist:@"challengerName"];
+    [query orderByAscending:@"ownerName"];
     __weak id weakSelf = self;
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects,
                                               NSError *error) {
@@ -173,6 +174,35 @@
     self.tableView.backgroundView = messageLabel;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
   }
+}
+
+- (IBAction)orderBy:(id)sender {
+  UISegmentedControl *segmentedControl = (UISegmentedControl *)sender;
+  NSInteger selectedSegment = segmentedControl.selectedSegmentIndex;
+
+  NSString *criteria;
+  switch (selectedSegment) {
+  case 0:
+    criteria = @"ownerName";
+    break;
+  case 1:
+    criteria = @"type";
+    break;
+  case 2:
+    criteria = @"location";
+    break;
+
+  default:
+    break;
+  }
+
+  NSSortDescriptor *descriptor =
+      [[NSSortDescriptor alloc] initWithKey:criteria ascending:YES];
+  NSArray *sortedArray =
+      [_availableChallenges sortedArrayUsingDescriptors:@[ descriptor ]];
+  _availableChallenges = [NSMutableArray arrayWithArray:sortedArray];
+
+  [[self tableView] reloadData];
 }
 
 - (void)showAlert:(NSString *)title andMessage:(NSString *)msg {
