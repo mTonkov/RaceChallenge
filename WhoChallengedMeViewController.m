@@ -93,8 +93,8 @@
     [refresh addTarget:self
                   action:@selector(getChallengesFromBackend)
         forControlEvents:UIControlEventValueChanged];
-    refresh.backgroundColor = [UIColor purpleColor];
-    refresh.tintColor = [UIColor whiteColor];
+    refresh.backgroundColor = [UIColor greenColor];
+    refresh.tintColor = [UIColor blueColor];
     self.refreshControl = refresh;
     [self setRefreshingMessage];
   }
@@ -117,7 +117,7 @@
   }
 
   NSDictionary *attrsDictionary =
-      [NSDictionary dictionaryWithObject:[UIColor whiteColor]
+      [NSDictionary dictionaryWithObject:[UIColor blueColor]
                                   forKey:NSForegroundColorAttributeName];
   NSAttributedString *attributedTitle =
       [[NSAttributedString alloc] initWithString:title

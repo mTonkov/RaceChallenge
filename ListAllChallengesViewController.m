@@ -36,8 +36,8 @@
   [self getChallengesFromBackend];
 
   self.refreshControl = [[UIRefreshControl alloc] init];
-  self.refreshControl.backgroundColor = [UIColor purpleColor];
-  self.refreshControl.tintColor = [UIColor whiteColor];
+  self.refreshControl.backgroundColor = [UIColor greenColor];
+  self.refreshControl.tintColor = [UIColor blueColor];
   [self.refreshControl addTarget:self
                           action:@selector(getChallengesFromBackend)
                 forControlEvents:UIControlEventValueChanged];
@@ -101,7 +101,7 @@
       [NSString stringWithFormat:@"Last update: %@",
                                  [formatter stringFromDate:[NSDate date]]];
   NSDictionary *attrsDictionary =
-      [NSDictionary dictionaryWithObject:[UIColor whiteColor]
+      [NSDictionary dictionaryWithObject:[UIColor blueColor]
                                   forKey:NSForegroundColorAttributeName];
   NSAttributedString *attributedTitle =
       [[NSAttributedString alloc] initWithString:title

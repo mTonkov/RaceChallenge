@@ -42,11 +42,11 @@
   switch (recognizer.direction) {
   case UISwipeGestureRecognizerDirectionRight:
     message = @"Swiped right";
-          _controllerIndex--;
+          _controllerIndex = (int)self.selectedIndex-1;
     break;
   case UISwipeGestureRecognizerDirectionLeft:
     message = @"Swiped left";
-          _controllerIndex++;
+          _controllerIndex = (int)self.selectedIndex+1;
     break;
   default:
     message = @"Not swiped";

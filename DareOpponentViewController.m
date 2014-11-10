@@ -46,7 +46,8 @@
       return;
     }
     
-  
+
+    [self animateButton:sender];
     self.selectedChallenge.challengerName = currentUser.username;
     self.selectedChallenge.challengerEmail = currentUser.email;
     self.selectedChallenge.challengerCar = self.currentUserCar.text;
@@ -66,7 +67,7 @@
     [dbHelper saveContext];
     NSLog(@"%@", newCdChallenge);
 
-    [self animateButton:sender];
+    
   }
 
 - (void)animateButton:(id)button {
@@ -96,6 +97,7 @@
                                            CGRectGetHeight(btn.frame))];
               }
               completion:^(BOOL finished) {
+                  btn.hidden = YES;
                     [self showAlert:@"New challenge!"
                          andMessage:[NSString stringWithFormat:@"You just challenged %@",
                                                                self.selectedChallenge.ownerName]];
@@ -113,7 +115,7 @@
   CGRect finalFrame = imageView.frame;
   finalFrame.size.width = 2 * CGRectGetWidth(btn.frame);
 
-  [UIView animateWithDuration:1.5
+  [UIView animateWithDuration:1.6
       delay:0.65
       options:UIViewAnimationOptionCurveEaseOut
       animations:^{ imageView.frame = finalFrame; }

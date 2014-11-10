@@ -45,24 +45,24 @@
 }
 
 - (IBAction)addNewChallenge:(id)sender {
-//  if ([self.carInput.text containsString:@"Car details"] ||
-//      self.carInput.text.length < 5) {
-//    [self showAlert:@"Incorrect input data!"
-//         andMessage:@"Please check you car details!"];
-//    return;
-//  }
-//
-//  Challenge *newChallenge = [Challenge object];
-//  newChallenge.ownerId = _currentUser.objectId;
-//  newChallenge.ownerName = _currentUser.username;
-//  newChallenge.ownerEmail = _currentUser.email;
-//  newChallenge.ownerCar = self.carInput.text;
-//  newChallenge.type = _chosenRace;
-//
-  //  if (self.locationInput.text.length > 0) {
-  //    newChallenge.location = self.locationInput.text;
-  //    [newChallenge saveInBackground];
-  //  } else {
+  if ([self.carInput.text containsString:@"Car details"] ||
+      self.carInput.text.length < 5) {
+    [self showAlert:@"Incorrect input data!"
+         andMessage:@"Please check you car details!"];
+    return;
+  }
+
+  Challenge *newChallenge = [Challenge object];
+  newChallenge.ownerId = _currentUser.objectId;
+  newChallenge.ownerName = _currentUser.username;
+  newChallenge.ownerEmail = _currentUser.email;
+  newChallenge.ownerCar = self.carInput.text;
+  newChallenge.type = _chosenRace;
+
+    if (self.locationInput.text.length > 0) {
+      newChallenge.location = self.locationInput.text;
+      [newChallenge saveInBackground];
+    } else {
 
   CLGeocoder *gCoder = [[CLGeocoder alloc] init];
   [_locationProvider getLocationWithBlock:^(CLLocation *location) {
@@ -72,15 +72,15 @@
                        if (!error) {
                          CLPlacemark *p = [placemarks lastObject];
 
-//                         newChallenge.location = p.addressDictionary[@"City"];
+                         newChallenge.location = p.addressDictionary[@"City"];
                          NSLog(@"%ld", placemarks.count);
                          NSLog(@"%@", p.addressDictionary[@"City"]);
                          NSLog(@"%@", p.addressDictionary[@"Country"]);
-                         //                             [newChallenge saveInBackground];
+                                                      [newChallenge saveInBackground];
                        }
                    }];
   }];
-  //  }
+    }
   [self animateButton:sender];
 }
 
