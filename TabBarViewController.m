@@ -77,4 +77,28 @@
     }
 }
 
+- (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event {
+      if (event.subtype == UIEventSubtypeMotionShake) {
+            [[[UIAlertView alloc]
+                           initWithTitle:@"Exit?"
+                                 message:@"Are you sure you want to exit this awesome app?"
+                                delegate:self
+                       cancelButtonTitle:@"Cancel"
+                       otherButtonTitles:@"Unfortunately, yes...", nil] show];
+          }
+    
+      if ([super respondsToSelector:@selector(motionEnded:withEvent:)])
+            [super motionEnded:motion withEvent:event];
+    }
+
+- (BOOL)canBecomeFirstResponder {
+      return YES;
+    }
+
+- (void)alertView:(UIAlertView *)alertView
+    clickedButtonAtIndex:(NSInteger)buttonIndex {
+      if (buttonIndex == 1) {
+            exit(0);
+         }
+    }
 @end
