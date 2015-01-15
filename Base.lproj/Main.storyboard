@@ -828,15 +828,6 @@ so be honest...</string>
                                     <action selector="signUpUser:" destination="psK-cr-3zy" eventType="touchUpInside" id="xNT-A5-lJJ"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="username" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hgM-M6-I5e">
-                                <rect key="frame" x="16" y="92" width="568" height="30"/>
-                                <rect key="contentStretch" x="0.0" y="0.0" width="1" height="0.94999999999999996"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="51O-J6-rSG"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES"/>
-                            </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="RaceChallenge App®" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zrf-i7-Pkn">
                                 <rect key="frame" x="214" y="571" width="173" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -857,6 +848,15 @@ so be honest...</string>
                                     <action selector="loginUser:" destination="psK-cr-3zy" eventType="touchUpInside" id="e1x-R0-vCh"/>
                                 </connections>
                             </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="username" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hgM-M6-I5e">
+                                <rect key="frame" x="16" y="92" width="568" height="30"/>
+                                <rect key="contentStretch" x="0.0" y="0.0" width="1" height="0.94999999999999996"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="51O-J6-rSG"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.74028284825052038" blue="0.38055196982716033" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
